@@ -29,6 +29,7 @@ namespace Lead.Management.API
         {
 
             services.AddControllers();
+            services.AddCors();
             services.AddSignalR();
             services.AddApiVersioning(options =>
             {
@@ -65,7 +66,7 @@ namespace Lead.Management.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(options => options.AllowAnyOrigin());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
