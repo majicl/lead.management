@@ -39,5 +39,14 @@ namespace Lead.Management.API.Controllers
 
              return Ok();
         }
+
+        [HttpPut("decline/{id:int}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> DeclineLead(int id, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new DeclineLead.Command(id), cancellationToken);
+
+            return Ok();
+        }
     }
 }
