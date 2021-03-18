@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Lead.Management.Application;
 using Lead.Management.Infrastructure;
+using Lead.Management.Infrastructure.Socket;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
@@ -28,7 +29,7 @@ namespace Lead.Management.API
         {
 
             services.AddControllers();
-
+            services.AddSignalR();
             services.AddApiVersioning(options =>
             {
                 // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
@@ -70,6 +71,7 @@ namespace Lead.Management.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<LeadHub>("/leadHub");
             });
 
             UseSwagger(app, provider);

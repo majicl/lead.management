@@ -18,24 +18,24 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
         private static string GetQuery(string status, bool contactIncluded = false)
         {
             var contactPartialQuery = contactIncluded
-                ? @"hipages.jobs.contact_phone AS ContactPhone,
-                    hipages.jobs.contact_email AS ContactEmail,"
+                ? @"jobs.contact_phone AS ContactPhone,
+                    jobs.contact_email AS ContactEmail,"
                 : string.Empty;
 
             return $@"SELECT 
-                    hipages.jobs.id AS Id,
-                    hipages.jobs.contact_name AS ContactName,
+                    jobs.id AS Id,
+                    jobs.contact_name AS ContactName,
                     {contactPartialQuery}
-                    hipages.jobs.description AS Description,
-                    hipages.jobs.price AS Price,
-                    hipages.jobs.created_at AS CreatedAt,
-                    hipages.categories.name as Category, 
-                    hipages.suburbs.postcode as Postcode,
-                    hipages.suburbs.name as Area
-                    FROM hipages.jobs INNER JOIN
-                    hipages.suburbs ON hipages.suburbs.id = hipages.jobs.suburb_id INNER JOIN
-                    hipages.categories ON hipages.categories.id = hipages.jobs.category_id
-                    WHERE hipages.jobs.status = '{status}'";
+                    jobs.description AS Description,
+                    jobs.price AS Price,
+                    jobs.created_at AS CreatedAt,
+                    categories.name as Category, 
+                    suburbs.postcode as Postcode,
+                    suburbs.name as Area
+                    FROM jobs INNER JOIN
+                    suburbs ON suburbs.id = jobs.suburb_id INNER JOIN
+                    categories ON categories.id = jobs.category_id
+                    WHERE jobs.status = '{status}'";
         }
 
 
@@ -65,7 +65,7 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
         {
             return await WithConnection(async c =>
             {
-                var query = $"UPDATE hipages.jobs SET status = 'accepted' Where status = 'new' and id = {id}";
+                var query = $"UPDATE jobs SET status = 'accepted' Where status = 'new' and id = {id}";
                 var result = await c.ExecuteAsync(query, cancellationToken);
                 return result;
             });
@@ -75,9 +75,38 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
         {
             return await WithConnection(async c =>
             {
-                var query = $"UPDATE hipages.jobs SET status = 'declined' Where status = 'new' and id = {id}";
+                var query = $"UPDATE jobs SET status = 'declined' Where status = 'new' and id = {id}";
                 var result = await c.ExecuteAsync(query, cancellationToken);
                 return result;
+            });
+        }
+
+        public async Task<LeadUpdate> GetLeadUpdateAsync(CancellationToken cancellationToken)
+        {
+            const string query = @"SELECT (SELECT count(*) FROM jobs
+                        WHERE status = 'new'
+                        ORDER BY created_at DESC
+                        LIMIT 1) AS InvitedCount,
+                        (SELECT count(*) FROM jobs
+                        WHERE status = 'accepted'
+                        ORDER BY updated_at DESC
+                        LIMIT 1) AS AcceptedCount,
+                        (SELECT created_at FROM jobs
+                        WHERE status = 'new'
+                        ORDER BY created_at DESC
+                        LIMIT 1) AS LastInvited,
+                        (SELECT updated_at FROM jobs
+                        WHERE status = 'accepted'
+                        ORDER BY updated_at DESC
+                        LIMIT 1)  AS LastAccepted
+                        FROM jobs
+                            LIMIT 1";
+
+            return await WithConnection(async c =>
+            {
+                var result = await c.QueryAsync<LeadUpdate>(query, cancellationToken);
+
+                return result.FirstOrDefault();
             });
         }
     }

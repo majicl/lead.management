@@ -10,6 +10,8 @@ namespace Lead.Management.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ILeadManagementRepository>(sp => new LeadManagementRepository(configuration.GetConnectionString("LeadManagementConnection")));
+            services.AddTransient<INotificationService, NotificationService>();
+
             return services;
         }
     }
