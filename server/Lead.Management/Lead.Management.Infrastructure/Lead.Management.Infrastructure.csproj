@@ -6,11 +6,11 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Persistence\Repositories\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Lead.Management.Application\Lead.Management.Application.csproj" />
     <ProjectReference Include="..\Lead.Management.Domain\Lead.Management.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lead.Management.Infrastructure", "Lead.Management.Infrastructure\Lead.Management.Infrastructure.csproj", "{612619E9-B7E4-4242-B56D-5CD07E1EE72A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D7F385FE-A2AC-4304-B557-7227A06B135A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lead.Management.Application", "Lead.Management.Application\Lead.Management.Application.csproj", "{025A1E2F-0A47-411A-8CB7-2C684D9F9926}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{612619E9-B7E4-4242-B56D-5CD07E1EE72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{612619E9-B7E4-4242-B56D-5CD07E1EE72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{612619E9-B7E4-4242-B56D-5CD07E1EE72A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{025A1E2F-0A47-411A-8CB7-2C684D9F9926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{025A1E2F-0A47-411A-8CB7-2C684D9F9926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{025A1E2F-0A47-411A-8CB7-2C684D9F9926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{025A1E2F-0A47-411A-8CB7-2C684D9F9926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0C07F12F-F5D1-43F7-9F94-05CF0BE41958} = {ED1EAD0B-1DDB-4C1A-A7E3-A2B99C48D107}
 		{612619E9-B7E4-4242-B56D-5CD07E1EE72A} = {94AD87A5-D190-4521-99AC-A850642B6979}
+		{025A1E2F-0A47-411A-8CB7-2C684D9F9926} = {D7F385FE-A2AC-4304-B557-7227A06B135A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28B7730D-F30A-45EA-B3CD-852999E4CA22}
