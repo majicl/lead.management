@@ -1,6 +1,6 @@
 import React from 'react';
-import CardList from '../tradie/info.card.list.container.jsx';
-import Loader from '../shared/Loaders/Loader.jsx';
+import CardList from '../Tradie/info.card.list.container.jsx';
+import Loader from '../Shared/Loaders/Loader.jsx';
 
 export default ({ readOnly, tradies, loading }) => {
   return (

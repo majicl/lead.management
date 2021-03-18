@@ -17,21 +17,19 @@ export const getAccepted = async () => {
 };
 
 export const acceptTradieById = async (tradieId) => {
-  const response = await fetch(
+  await fetch(
     `${appConfig.leadManagementProviderBaseUrl}lead/accept/${tradieId}`,
     {
-      method: "PUT",
+      method: "PUT"
     }
   );
-  return response.json();
 };
 
 export const declineTradieById = async (tradieId) => {
-  const response = await fetch(
+  await fetch(
     `${appConfig.leadManagementProviderBaseUrl}lead/decline/${tradieId}`,
     {
-      method: "PUT",
+      method: "PUT"
     }
   );
-  return response.json();
 };

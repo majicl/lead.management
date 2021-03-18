@@ -5,8 +5,9 @@ const ActionBar = lazy(() => import("./action.bar.jsx"));
 
 const InfoCard = ({
   id,
-  name,
-  createdAt,
+  contactFirstName,
+  createdAtDate,
+  createdAtTime,
   suburb,
   category,
   description,
@@ -21,13 +22,13 @@ const InfoCard = ({
     return (
       <header className="card-item header">
         <div className="logo">
-          <strong>{name[0]}</strong>
+          <strong>{contactFirstName[0]}</strong>
         </div>
         <div className="info">
           <div>
-            <strong>{name}</strong>
+            <strong>{contactFirstName}</strong>
           </div>
-          <div>{createdAt}</div>
+          <div>{createdAtDate} @ {createdAtTime}</div>
         </div>
       </header>
     );

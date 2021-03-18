@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs from '../shared/Tab/Tabs.jsx';
+import Tabs from '../Shared/Tab/Tabs.jsx';
 import LeadsTab from './leadsTab.jsx';
 
 const LeadManagement = ({

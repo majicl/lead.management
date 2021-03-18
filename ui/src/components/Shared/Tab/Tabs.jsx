@@ -7,7 +7,7 @@ const Tabs = ({ children, onChange = () => {} }) => {
 
   useEffect(() => {
     onChange(activeTab);
-  }, [activeTab]);
+  }, [activeTab, onChange]);
 
   return (
     <div className="tabs">
