@@ -8,8 +8,9 @@ using Lead.Management.Application.Handlers.Leads.Queries;
 using MediatR;
 namespace Lead.Management.API.Controllers
 {
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [Route("api/[controller]")]
     public class LeadController : ControllerBase
     {
         private readonly IMediator _mediator;
