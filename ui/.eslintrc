@@ -4,10 +4,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "prettier/prettier": "off",
@@ -32,15 +29,13 @@
     "import/extensions": "off",
     "react/no-array-index-key": "off",
     "import/no-unresolved": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "import/no-anonymous-default-export": "off"
   },
   "globals": {
     "document": "readonly",
     "window": "readonly",
     "navigator": "readonly",
     "fetch": "readonly"
-  },
-  "env": {
-    "jest/globals": true
   }
 }
