@@ -2,7 +2,7 @@
 {
     public class AcceptedLead : Lead
     {
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string ContactEmail { get; set; }
+        public string ContactPhone { get; set; }
     }
 }
