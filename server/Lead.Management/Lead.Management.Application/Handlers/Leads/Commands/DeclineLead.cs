@@ -20,14 +20,17 @@ namespace Lead.Management.Application.Handlers.Leads.Commands
         public class Handler : IRequestHandler<Command>
         {
             private readonly ILeadManagementRepository _leadManagementRepository;
-            public Handler(ILeadManagementRepository leadManagementRepository)
+            private readonly INotificationService _notificationService;
+            public Handler(ILeadManagementRepository leadManagementRepository, INotificationService notificationService)
             {
                 _leadManagementRepository = leadManagementRepository;
+                _notificationService = notificationService;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 await _leadManagementRepository.DeclineLeadByIdAsync(request.Id, cancellationToken);
+                await _notificationService.NotifyLeadChanges();
 
                 return Unit.Value;
             }
