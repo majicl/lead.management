@@ -25,12 +25,11 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
             return $@"SELECT 
                     hipages.jobs.id AS Id,
                     hipages.jobs.contact_name AS ContactName,
-                    {contactPartialQuery},
+                    {contactPartialQuery}
                     hipages.jobs.description AS Description,
                     hipages.jobs.price AS Price,
                     hipages.jobs.created_at AS CreatedAt,
                     hipages.categories.name as Category, 
-                    hipages.suburbs.name as Suburbs, 
                     hipages.suburbs.postcode as Postcode,
                     hipages.suburbs.name as Area
                     FROM hipages.jobs INNER JOIN

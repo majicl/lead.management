@@ -2,6 +2,7 @@
 using System.Data;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace Lead.Management.Infrastructure.Persistence
 {
@@ -18,7 +19,7 @@ namespace Lead.Management.Infrastructure.Persistence
         {
             try
             {
-                await using var connection = new SqlConnection(_connectionString);
+                await using var connection = new MySqlConnection(_connectionString);
                 await connection.OpenAsync();
 
                 return

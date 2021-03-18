@@ -30,6 +30,7 @@ namespace Lead.Management.Application.Handlers.Leads.Queries
                 return Map(result);
             }
 
+            //Todo: Could be AutoMapper Instead
             private static ICollection<InvitedLeadDto> Map(IEnumerable<InvitedLead> invitedLeads)
             {
                 return invitedLeads.Select(lead => new InvitedLeadDto
@@ -38,7 +39,7 @@ namespace Lead.Management.Application.Handlers.Leads.Queries
                     Category = lead.Category,
                     Description = lead.Description,
                     Price = lead.Price,
-                    Suburb = lead.Suburb,
+                    Suburb = $"{lead.Area} {lead.Postcode}",
                     CreatedAtDate = lead.CreatedAt.GetDate(),
                     CreatedAtTime = lead.CreatedAt.GetTime(),
                     ContactFirstName = lead.ContactName.GetFirstPart()
