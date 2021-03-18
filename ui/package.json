@@ -16,6 +16,9 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
