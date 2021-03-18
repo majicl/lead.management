@@ -1,0 +1,22 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /src
+COPY ["Lead.Management.API/Lead.Management.API.csproj", "Lead.Management.API/"]
+RUN dotnet restore "Lead.Management.API/Lead.Management.API.csproj"
+COPY . .
+WORKDIR "/src/Lead.Management.API"
+RUN dotnet build "Lead.Management.API.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Lead.Management.API.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Lead.Management.API.dll"]
