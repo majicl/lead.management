@@ -1,0 +1,30 @@
+.tabs {
+  background-color: #eee;
+  padding: 10px;
+  width: 100%;
+}
+
+.tab-list {
+  border-bottom: 1px solid #ccc;
+  padding-left: 0;
+  display: flex;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.tab-list-item {
+  background-color: white;
+  display: inline-block;
+  list-style: none;
+  padding: 0.5rem 0.75rem;
+  flex-grow: 1;
+  box-shadow: 0 0 2px;
+  line-height: 35px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tab-list-active {
+  border-bottom: 4px solid #ff7b11;
+  font-weight: bold;
+}
