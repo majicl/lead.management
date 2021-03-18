@@ -9,5 +9,7 @@ namespace Lead.Management.Application.Services.Interfaces
     {
         Task<ICollection<InvitedLead>> GetInvitedLeadsAsync(CancellationToken cancellationToken);
         Task<ICollection<AcceptedLead>> GetAcceptedLeadsAsync(CancellationToken cancellationToken);
+        Task<int> AcceptLeadByIdAsync(int id, CancellationToken cancellationToken);
+        Task<int> DeclineLeadByIdAsync(int id, CancellationToken cancellationToken);
     }
 }

@@ -14,6 +14,7 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
         {
         }
 
+        // Todo: Majid: Don't like to maintain queries 🤦‍♂️! Use an ORM
         private static string GetQuery(string status, bool contactIncluded = false)
         {
             var contactPartialQuery = contactIncluded
@@ -38,6 +39,7 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
                     WHERE hipages.jobs.status = '{status}'";
         }
 
+
         public async Task<ICollection<AcceptedLead>> GetAcceptedLeadsAsync(CancellationToken cancellationToken)
         {
             return await WithConnection(async c =>
@@ -57,6 +59,26 @@ namespace Lead.Management.Infrastructure.Persistence.Repositories
                 var result = await c.QueryAsync<InvitedLead>(query, cancellationToken);
 
                 return result.ToList();
+            });
+        }
+
+        public async Task<int> AcceptLeadByIdAsync(int id, CancellationToken cancellationToken)
+        {
+            return await WithConnection(async c =>
+            {
+                var query = $"UPDATE hipages.jobs SET status = 'accepted' Where status = 'new' and id = {id}";
+                var result = await c.ExecuteAsync(query, cancellationToken);
+                return result;
+            });
+        }
+
+        public async Task<int> DeclineLeadByIdAsync(int id, CancellationToken cancellationToken)
+        {
+            return await WithConnection(async c =>
+            {
+                var query = $"UPDATE hipages.jobs SET status = 'declined' Where status = 'new' and id = {id}";
+                var result = await c.ExecuteAsync(query, cancellationToken);
+                return result;
             });
         }
     }
