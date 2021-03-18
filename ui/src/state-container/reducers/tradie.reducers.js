@@ -1,7 +1,7 @@
-import { handleActions } from '../../utils';
-import types from '../actions/tradie.action.types.js';
+import { handleActions } from "../../utils";
+import types from "../actions/tradie.action.types.js";
 
-const { LOAD_INVITED, LOAD_ACCEPTED } = types;
+const { LOAD_INVITED, LOAD_ACCEPTED, UPDATE_NOTIFICATION } = types;
 
 const INITIAL_STATE = {
   invited: {
@@ -84,6 +84,21 @@ const reducers = {
         }
       };
     }
+  },
+  [UPDATE_NOTIFICATION]: (state, { update }) => {
+    return {
+      ...state,
+      accpeted: {
+        ...state.accpeted,
+        count: update.acceptedCount,
+        lastAccepted: update.lastAccepted
+      },
+      invited: {
+        ...state.invited,
+        count: update.acceptedCount,
+        lastInvited: update.lastInvited
+      }
+    };
   }
 };
 

@@ -1,12 +1,12 @@
-import types from './tradie.action.types';
+import types from "./tradie.action.types";
 import {
   getInvited,
   getAccepted,
   acceptTradieById,
   declineTradieById
-} from '../../api/tradies.provider';
+} from "../../api/tradies.provider";
 
-const { LOAD_INVITED, LOAD_ACCEPTED } = types;
+const { LOAD_INVITED, LOAD_ACCEPTED, UPDATE_NOTIFICATION } = types;
 
 const dispatchLoadInvited = (dispatch) =>
   dispatch({
@@ -39,6 +39,13 @@ export const acceptTradie = (tradieId) => async (dispatch) => {
 export const declineTradie = (tradieId) => async (dispatch) => {
   await declineTradieById(tradieId);
   dispatchLoadInvited(dispatch);
+};
+
+export const leadUpdate = (update) => async (dispatch) => {
+  dispatch({
+    type: UPDATE_NOTIFICATION,
+    update
+  });
 };
 
 export const loadTradiesActionCreator = {
