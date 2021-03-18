@@ -47,6 +47,14 @@ const InfoCard = ({
     return <div className="splitter" />;
   };
 
+  const Price = () => {
+    return (
+      <span className="price-container">
+        <strong>{price}</strong> Lead Invitation
+      </span>
+    );
+  };
+
   return (
     <div className="card">
       {loading && (
@@ -69,6 +77,7 @@ const InfoCard = ({
           🧰 Job ID:
           {id}
         </span>
+        {!action.active && <span className="label-item">{Price()}</span>}
       </div>
       {splitter()}
       {contactInfo && (
@@ -96,9 +105,7 @@ const InfoCard = ({
               />
             </Suspense>
           </section>
-          <section className="price-container">
-            <strong>{price}</strong> Lead Invitation
-          </section>
+          {Price()}
         </div>
       )}
     </div>
