@@ -66,7 +66,12 @@ namespace Lead.Management.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
+            app.UseCors(options => options
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .SetIsOriginAllowed((host) => true));
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
