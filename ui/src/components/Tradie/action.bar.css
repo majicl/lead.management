@@ -1,0 +1,26 @@
+.btn {
+  padding: 7px 18px;
+  border: none;
+  color: black;
+  cursor: pointer;
+  margin: 2px;
+  font-weight: bold;
+  outline: none;
+}
+
+.btn :hover {
+  border-bottom-width: 1px;
+}
+
+.btn-primary {
+  background-color: #ff7b11;
+  color: white;
+  border-bottom: 3px solid #d66912;
+}
+
+.btn-secondry {
+  background-color: #e7e5e5;
+  color: white;
+  border-bottom: 3px solid silver;
+  color: gray;
+}
