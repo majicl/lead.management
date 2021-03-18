@@ -9,6 +9,6 @@
         public string Description { get; set; }
         public string CreatedAtDate { get; set; }
         public string CreatedAtTime { get; set; }
-        public decimal Price { get; set; }
+        public string Price { get; set; }
     }
 }

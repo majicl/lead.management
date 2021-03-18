@@ -6,12 +6,14 @@ const ActionBar = lazy(() => import("./action.bar.jsx"));
 const InfoCard = ({
   id,
   contactFirstName,
+  contactLastName,
   createdAtDate,
   createdAtTime,
   suburb,
   category,
   description,
   contactInfo,
+  price,
   action = {
     onDecline: () => {},
     onAccept: () => {}
@@ -22,13 +24,20 @@ const InfoCard = ({
     return (
       <header className="card-item header">
         <div className="logo">
-          <strong>{contactFirstName[0]}</strong>
+          <strong>
+            {contactFirstName[0]}
+            {(contactLastName || "")[0]}
+          </strong>
         </div>
         <div className="info">
           <div>
-            <strong>{contactFirstName}</strong>
+            <strong>
+              {contactFirstName} {contactLastName}
+            </strong>
           </div>
-          <div>{createdAtDate} @ {createdAtTime}</div>
+          <div>
+            {createdAtDate} @ {createdAtTime}
+          </div>
         </div>
       </header>
     );
@@ -78,14 +87,19 @@ const InfoCard = ({
       <p className="card-item">{description}</p>
       {splitter()}
       {action.active && (
-        <section className="card-item">
-          <Suspense fallback={<div>Loading...</div>}>
-            <ActionBar
-              onAccept={() => action.onAccept.call(this, id)}
-              onDecline={() => action.onDecline.call(this, id)}
-            />
-          </Suspense>
-        </section>
+        <div className="action-container">
+          <section className="card-item">
+            <Suspense fallback={<div>Loading...</div>}>
+              <ActionBar
+                onAccept={() => action.onAccept.call(this, id)}
+                onDecline={() => action.onDecline.call(this, id)}
+              />
+            </Suspense>
+          </section>
+          <section className="price-container">
+            <strong>{price}</strong> Lead Invitation
+          </section>
+        </div>
       )}
     </div>
   );

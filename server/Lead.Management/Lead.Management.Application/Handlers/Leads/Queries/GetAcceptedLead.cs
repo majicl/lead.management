@@ -38,7 +38,7 @@ namespace Lead.Management.Application.Handlers.Leads.Queries
                     Id = lead.Id,
                     Category = lead.Category,
                     Description = lead.Description,
-                    Price = lead.Price,
+                    Price = lead.Price.ToCurrency(),
                     Suburb = $"{lead.Area} {lead.Postcode}",
                     CreatedAtDate = lead.CreatedAt.GetDate(),
                     CreatedAtTime = lead.CreatedAt.GetTime(),
