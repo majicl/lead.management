@@ -11,11 +11,6 @@ namespace Lead.Management.API.Controllers
     [Route("api/[controller]")]
     public class LeadController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly IMediator _mediator;
 
         public LeadController(IMediator mediator) => _mediator = mediator;
@@ -25,6 +20,12 @@ namespace Lead.Management.API.Controllers
         public async Task<IEnumerable<InvitedLeadDto>> GetInvitedLeads(CancellationToken cancellationToken)
         {
             return await _mediator.Send(new GetInvitedLeads.Query(), cancellationToken);
+        }
+
+        [HttpGet("accepted")]
+        public async Task<IEnumerable<InvitedLeadDto>> GetAcceptedLeads(CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetAcceptedLead.Query(), cancellationToken);
         }
     }
 }
