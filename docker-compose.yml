@@ -13,17 +13,11 @@ services:
     working_dir: /opt/ui
 
   server:
-    entrypoint: ["npm", "start"]
-    environment:
-      NODE_ENV: development
-    image: node:10.15-alpine
-    links:
-      - database:database
+    build:
+      dockerfile: ./Dockerfile
+      context: ./server/Lead.Management
     ports:
-      - "8080:8080"
-    volumes:
-      - ./server:/opt/server
-    working_dir: /opt/server
+      - "443:443"
   
   database:
     image: mysql:5.6
