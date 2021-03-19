@@ -1,11 +1,12 @@
 import "@testing-library/jest-dom";
-
-import * as React from "react";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import Price from "../../../../src/components/Tradie/Price.jsx";
 
 test("Price", () => {
   const price = "12.00";
-  render(<Price price={price} />);
+  const label = "Lead";
+  render(<Price price={price} label={label} />);
   expect(screen.getByText(price)).toBeInTheDocument();
+  expect(screen.getByText(label)).toBeInTheDocument();
 });
