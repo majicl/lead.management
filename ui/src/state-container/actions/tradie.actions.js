@@ -15,6 +15,12 @@ const dispatchLoadInvited = (dispatch) =>
     payload: getInvited
   });
 
+const dispatchLoadAccepted = (dispatch) =>
+  dispatch({
+    type: LOAD_ACCEPTED,
+    payload: getAccepted
+  });
+
 export const loadInvitedTradies = () => (dispatch, getState) => {
   const { invited } = getState().tradies;
   if (invited.initiated) return;
@@ -26,10 +32,7 @@ export const loadAcceptedTradies = () => (dispatch, getState) => {
   const { accpeted } = getState().tradies;
   if (accpeted.initiated) return;
 
-  dispatch({
-    type: LOAD_ACCEPTED,
-    payload: getAccepted
-  });
+  dispatchLoadAccepted(dispatch);
 };
 
 export const acceptTradie = (tradieId) => async (dispatch) => {
@@ -42,7 +45,27 @@ export const declineTradie = (tradieId) => async (dispatch) => {
   dispatchLoadInvited(dispatch);
 };
 
-export const leadUpdate = (payload) => (dispatch) => {
+export const leadUpdate = (payload) => (dispatch, getState) => {
+  const {
+    tradies: { accpeted }
+  } = getState();
+  
+  // location could be in the store
+  const isInvitedDataNeedsToBeReloaded =
+    location.pathname.toLowerCase().includes("invited");
+
+  const isAcceptedDataNeedsToBeReloaded =
+    location.pathname.toLowerCase().includes("accepted") &&
+    accpeted.lastAccepted !== payload.lastAccepted;
+
+  if (isInvitedDataNeedsToBeReloaded) {
+    dispatchLoadInvited(dispatch);
+  }
+
+  if (isAcceptedDataNeedsToBeReloaded) {
+    dispatchLoadAccepted(dispatch);
+  }
+
   dispatch({
     type: UPDATE_NOTIFICATION,
     payload

@@ -31,12 +31,14 @@
     "import/no-unresolved": "off",
     "no-use-before-define": "off",
     "import/no-anonymous-default-export": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "no-restricted-globals": "off"
   },
   "globals": {
     "document": "readonly",
     "window": "readonly",
     "navigator": "readonly",
-    "fetch": "readonly"
+    "fetch": "readonly",
+    "location": "readonly"
   }
 }
