@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import Tabs from "../Shared/Tab/Tabs.jsx";
-import LeadsTab from "./leadsTab.jsx";
+import CardList from "../Tradie/info.card.list.container.jsx";
 
 const LeadManagement = ({
   invitedTradies,
@@ -14,27 +14,6 @@ const LeadManagement = ({
   defaultTab
 }) => {
   const history = useHistory();
-
-  const getInvitedCardList = () => {
-    return (
-      <LeadsTab
-        tradies={invitedTradies}
-        loading={loadingInvitedTradies}
-        readOnly={false}
-      />
-    );
-  };
-
-  const getAcceptedCardList = () => {
-    return (
-      <LeadsTab
-        tradies={accpetedTradies}
-        loading={loadingAcceptedTradies}
-        readOnly
-      />
-    );
-  };
-
   const getInvitedHeader = () => {
     const moreInfo = updateLoadingstatus ? "Loading..." : invitedCount;
     return `Invited (${moreInfo})`;
@@ -53,10 +32,18 @@ const LeadManagement = ({
   return (
     <Tabs onChange={onTabChange} defaultTab={defaultTab}>
       <div value="Invited" label={getInvitedHeader()}>
-        {getInvitedCardList()}
+        <CardList
+          tradies={invitedTradies}
+          readonly={false}
+          loading={loadingInvitedTradies}
+        />
       </div>
       <div value="Accepted" label={getAcceptedHeader()}>
-        {getAcceptedCardList()}
+        <CardList
+          tradies={accpetedTradies}
+          readonly={true}
+          loading={loadingAcceptedTradies}
+        />
       </div>
     </Tabs>
   );
