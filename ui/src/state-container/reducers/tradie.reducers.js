@@ -103,7 +103,8 @@ const upateToState = (state, { payload }) => ({
   invited: {
     ...state.invited,
     count: payload.invitedCount,
-    lastInvited: payload.lastInvited
+    lastInvited: payload.lastInvited,
+    initiated: false
   }
 });
 

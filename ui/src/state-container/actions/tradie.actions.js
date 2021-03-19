@@ -42,7 +42,7 @@ export const declineTradie = (tradieId) => async (dispatch) => {
   dispatchLoadInvited(dispatch);
 };
 
-export const leadUpdate = (payload) => async (dispatch) => {
+export const leadUpdate = (payload) => (dispatch) => {
   dispatch({
     type: UPDATE_NOTIFICATION,
     payload
