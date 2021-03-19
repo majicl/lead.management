@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
 import config from "./config.js";
-import { leadUpdate } from "./state-container/actions/tradie.actions.js";
+import { leadUpdate, loadLeadsUpdate } from "./state-container/actions/tradie.actions.js";
 import { store } from "./state-container/store";
 
 export const eventHandler = (update) => {
@@ -11,6 +11,8 @@ export const eventHandler = (update) => {
 export default () => {
   const socketConfig = config.get().socket;
   useEffect(() => {
+    store.dispatch(loadLeadsUpdate());
+
     let connection = new signalR.HubConnectionBuilder()
       .withUrl(socketConfig.url)
       .build();

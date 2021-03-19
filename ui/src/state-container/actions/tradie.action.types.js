@@ -1,3 +1,3 @@
 import { createActionTypeMap } from '../../utils.js';
 
-export default createActionTypeMap('TRADIE', ['LOAD_INVITED', 'LOAD_ACCEPTED', 'DECLINE', 'ACCEPT', 'UPDATE_NOTIFICATION']);
+export default createActionTypeMap('TRADIE', ['LOAD_INVITED', 'LOAD_ACCEPTED', 'DECLINE', 'ACCEPT', 'UPDATE_NOTIFICATION', 'LOAD_UPDATE']);

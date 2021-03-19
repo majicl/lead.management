@@ -16,6 +16,14 @@ export const getAccepted = async () => {
   return response.json();
 };
 
+
+export const getStatus = async () => {
+  const response = await fetch(
+    `${appConfig.leadManagementProviderBaseUrl}lead/status`
+  );
+  return response.json();
+};
+
 export const acceptTradieById = async (tradieId) => {
   await fetch(
     `${appConfig.leadManagementProviderBaseUrl}lead/accept/${tradieId}`,

@@ -10,7 +10,8 @@ const LeadManagement = ({
   loadingAcceptedTradies,
   loadingInvitedTradies,
   accpetedCount,
-  invitedCount
+  invitedCount,
+  updateLoadingstatus
 }) => {
   const getInvitedCardList = () => {
     return (
@@ -33,12 +34,12 @@ const LeadManagement = ({
   };
 
   const getInvitedHeader = () => {
-    const moreInfo = loadingInvitedTradies ? 'Loading...' : invitedCount;
+    const moreInfo = updateLoadingstatus ? 'Loading...' : invitedCount;
     return `Invited (${moreInfo})`;
   };
 
   const getAcceptedHeader = () => {
-    const moreInfo = loadingAcceptedTradies ? 'Loading...' : accpetedCount;
+    const moreInfo = updateLoadingstatus ? 'Loading...' : accpetedCount;
     return `Accepted (${moreInfo})`;
   };
 

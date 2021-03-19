@@ -1,7 +1,7 @@
 import { handleActions } from "../../utils";
 import types from "../actions/tradie.action.types.js";
 
-const { LOAD_INVITED, LOAD_ACCEPTED, UPDATE_NOTIFICATION } = types;
+const { LOAD_INVITED, LOAD_ACCEPTED, UPDATE_NOTIFICATION, LOAD_UPDATE } = types;
 
 const INITIAL_STATE = {
   invited: {
@@ -15,43 +15,11 @@ const INITIAL_STATE = {
     initiated: false,
     count: 0,
     loading: false
-  }
+  },
+  statusLoading: true
 };
 
-const reducers = {
-  [LOAD_INVITED]: {
-    PENDING: (state) => {
-      return {
-        ...state,
-        invited: {
-          ...state.invited,
-          loading: true
-        },
-        error: undefined
-      };
-    },
-    FULFILLED: (state, action) => {
-      return {
-        ...state,
-        invited: {
-          initiated: true,
-          list: [...action.payload],
-          count: action.payload.length,
-          loading: false
-        }
-      };
-    },
-    REJECTED: (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
-        invited: {
-          ...state.invited,
-          loading: false
-        }
-      };
-    }
-  },
+const loadAccepted = {
   [LOAD_ACCEPTED]: {
     PENDING: (state) => {
       return {
@@ -63,43 +31,105 @@ const reducers = {
         error: undefined
       };
     },
-    FULFILLED: (state, action) => {
+    FULFILLED: (state, { payload }) => {
       return {
         ...state,
         accpeted: {
+          ...state.accpeted,
           initiated: true,
-          list: [...action.payload],
-          count: action.payload.length,
-          loading: false
+          loading: false,
+          list: [...payload]
         }
       };
     },
-    REJECTED: (state, action) => {
+    REJECTED: (state, { payload }) => {
       return {
         ...state,
-        error: action.payload,
+        error: payload,
         accpeted: {
           ...state.accpeted,
           loading: false
         }
       };
     }
-  },
-  [UPDATE_NOTIFICATION]: (state, { update }) => {
-    return {
-      ...state,
-      accpeted: {
-        ...state.accpeted,
-        count: update.acceptedCount,
-        lastAccepted: update.lastAccepted
-      },
-      invited: {
-        ...state.invited,
-        count: update.acceptedCount,
-        lastInvited: update.lastInvited
-      }
-    };
   }
+};
+
+const loadInvited = {
+  [LOAD_INVITED]: {
+    PENDING: (state) => {
+      return {
+        ...state,
+        invited: {
+          ...state.invited,
+          loading: true
+        },
+        error: undefined
+      };
+    },
+    FULFILLED: (state, { payload }) => {
+      return {
+        ...state,
+        invited: {
+          ...state.invited,
+          initiated: true,
+          loading: false,
+          list: [...payload]
+        }
+      };
+    },
+    REJECTED: (state, { payload }) => {
+      return {
+        ...state,
+        error: payload,
+        invited: {
+          ...state.invited,
+          loading: false
+        }
+      };
+    }
+  }
+};
+
+const upateToState = (state, { payload }) => ({
+  ...state,
+  statusLoading: false,
+  accpeted: {
+    ...state.accpeted,
+    count: payload.acceptedCount,
+    lastAccepted: payload.lastAccepted,
+    initiated: false
+  },
+  invited: {
+    ...state.invited,
+    count: payload.invitedCount,
+    lastInvited: payload.lastInvited
+  }
+});
+
+const loadUpdate = {
+  [LOAD_UPDATE]: {
+    PENDING: (state) => {
+      return {
+        ...state,
+        statusLoading: true
+      };
+    },
+    FULFILLED: upateToState,
+    REJECTED: (state, { payload }) => {
+      return {
+        ...state,
+        error: payload
+      };
+    }
+  }
+};
+
+const reducers = {
+  ...loadAccepted,
+  ...loadInvited,
+  ...loadUpdate,
+  [UPDATE_NOTIFICATION]: upateToState
 };
 
 export default handleActions(INITIAL_STATE, reducers);

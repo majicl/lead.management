@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 const invitedSelector = (state) => state.tradies.invited.list || [];
 const acceptedSelector = (state) => state.tradies.accpeted.list || [];
@@ -7,6 +7,7 @@ const acceptedCountSelector = (state) => state.tradies.accpeted.count;
 const loadingInvitedTradiesSelector = (state) => state.tradies.invited.loading;
 const loadingAcceptedTradiesSelector = (state) =>
   state.tradies.accpeted.loading;
+const updateLoadingstatusLoadingSelector = (state) => state.tradies.statusLoading;
 
 export const tradiesSelector = createSelector(
   invitedSelector,
@@ -15,22 +16,24 @@ export const tradiesSelector = createSelector(
   loadingAcceptedTradiesSelector,
   invitedCountSelector,
   acceptedCountSelector,
+  updateLoadingstatusLoadingSelector,
   (
     invitedTradies,
     accpetedTradies,
     loadingInvitedTradies,
     loadingAcceptedTradies,
     invitedCount,
-    accpetedCount
+    accpetedCount,
+    updateLoadingstatus
   ) => {
     return {
       invitedTradies,
       accpetedTradies,
       loadingInvitedTradies,
       loadingAcceptedTradies,
-      tradiesCount: invitedTradies.length + accpetedTradies.length,
       invitedCount,
-      accpetedCount
+      accpetedCount,
+      updateLoadingstatus
     };
   }
 );
