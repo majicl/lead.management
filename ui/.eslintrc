@@ -30,7 +30,8 @@
     "react/no-array-index-key": "off",
     "import/no-unresolved": "off",
     "no-use-before-define": "off",
-    "import/no-anonymous-default-export": "off"
+    "import/no-anonymous-default-export": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   "globals": {
     "document": "readonly",

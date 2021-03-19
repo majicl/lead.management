@@ -1,18 +1,20 @@
-import React from 'react';
-import Tabs from '../Shared/Tab/Tabs.jsx';
-import LeadsTab from './leadsTab.jsx';
+import { useHistory } from "react-router-dom";
+import Tabs from "../Shared/Tab/Tabs.jsx";
+import LeadsTab from "./leadsTab.jsx";
 
 const LeadManagement = ({
-  loadInvitedTradies,
-  loadAcceptedTradies,
   invitedTradies,
   accpetedTradies,
   loadingAcceptedTradies,
   loadingInvitedTradies,
   accpetedCount,
   invitedCount,
-  updateLoadingstatus
+  updateLoadingstatus,
+  location,
+  defaultTab
 }) => {
+  const history = useHistory();
+
   const getInvitedCardList = () => {
     return (
       <LeadsTab
@@ -34,25 +36,22 @@ const LeadManagement = ({
   };
 
   const getInvitedHeader = () => {
-    const moreInfo = updateLoadingstatus ? 'Loading...' : invitedCount;
+    const moreInfo = updateLoadingstatus ? "Loading..." : invitedCount;
     return `Invited (${moreInfo})`;
   };
 
   const getAcceptedHeader = () => {
-    const moreInfo = updateLoadingstatus ? 'Loading...' : accpetedCount;
+    const moreInfo = updateLoadingstatus ? "Loading..." : accpetedCount;
     return `Accepted (${moreInfo})`;
   };
 
   const onTabChange = (tab) => {
-    if (tab === 'Invited') {
-      loadInvitedTradies();
-    } else {
-      loadAcceptedTradies();
-    }
+    if (!location.pathname.includes(tab.toLowerCase()))
+      history.push(tab.toLowerCase());
   };
 
   return (
-    <Tabs onChange={onTabChange}>
+    <Tabs onChange={onTabChange} defaultTab={defaultTab}>
       <div value="Invited" label={getInvitedHeader()}>
         {getInvitedCardList()}
       </div>
