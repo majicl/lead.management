@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Lead.Management.Application.Handlers.Leads;
 using Lead.Management.Application.Handlers.Leads.Commands;
 using Lead.Management.Application.Handlers.Leads.Queries;
+using Lead.Management.Domain;
 using MediatR;
 namespace Lead.Management.API.Controllers
 {
@@ -36,9 +37,9 @@ namespace Lead.Management.API.Controllers
         [ProducesResponseType(200)]
         public async Task<ActionResult> AcceptLead(int id, CancellationToken cancellationToken)
         {
-             await _mediator.Send(new AcceptLead.Command(id), cancellationToken);
+            await _mediator.Send(new AcceptLead.Command(id), cancellationToken);
 
-             return Ok();
+            return Ok();
         }
 
         [HttpPut("decline/{id:int}")]
@@ -48,6 +49,13 @@ namespace Lead.Management.API.Controllers
             await _mediator.Send(new DeclineLead.Command(id), cancellationToken);
 
             return Ok();
+        }
+
+        [HttpGet("status")]
+        [ProducesResponseType(200)]
+        public async Task<LeadUpdate> GetLeadsStatus(CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetLeadsStatus.Query(), cancellationToken);
         }
     }
 }
