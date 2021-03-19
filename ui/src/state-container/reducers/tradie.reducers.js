@@ -45,7 +45,7 @@ const loadAccepted = {
     REJECTED: (state, { payload }) => {
       return {
         ...state,
-        error: payload,
+        error: payload.message || true,
         accpeted: {
           ...state.accpeted,
           loading: false
@@ -81,7 +81,7 @@ const loadInvited = {
     REJECTED: (state, { payload }) => {
       return {
         ...state,
-        error: payload,
+        error: payload.message || true,
         invited: {
           ...state.invited,
           loading: false
@@ -120,7 +120,8 @@ const loadUpdate = {
     REJECTED: (state, { payload }) => {
       return {
         ...state,
-        error: payload
+        error: payload.message || true,
+        statusLoading: false
       };
     }
   }

@@ -1,6 +1,8 @@
+import { Fragment, Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
 import Tabs from "../Shared/Tab/Tabs.jsx";
 import CardList from "../Tradie/info.card.list.container.jsx";
+const Error = lazy(() => import("../Shared/api.error.generic.jsx"));
 
 const LeadManagement = ({
   invitedTradies,
@@ -11,7 +13,8 @@ const LeadManagement = ({
   invitedCount,
   updateLoadingstatus,
   location,
-  defaultTab
+  defaultTab,
+  error
 }) => {
   const history = useHistory();
   const getInvitedHeader = () => {
@@ -30,22 +33,31 @@ const LeadManagement = ({
   };
 
   return (
-    <Tabs onChange={onTabChange} defaultTab={defaultTab}>
-      <div value="Invited" label={getInvitedHeader()}>
-        <CardList
-          tradies={invitedTradies}
-          readonly={false}
-          loading={loadingInvitedTradies}
-        />
-      </div>
-      <div value="Accepted" label={getAcceptedHeader()}>
-        <CardList
-          tradies={accpetedTradies}
-          readonly={true}
-          loading={loadingAcceptedTradies}
-        />
-      </div>
-    </Tabs>
+    <main style={{ width: "100%" }}>
+      {error && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Error />
+        </Suspense>
+      )}
+      {!error && (
+        <Tabs onChange={onTabChange} defaultTab={defaultTab}>
+          <div value="Invited" label={getInvitedHeader()}>
+            <CardList
+              tradies={invitedTradies}
+              readonly={false}
+              loading={loadingInvitedTradies}
+            />
+          </div>
+          <div value="Accepted" label={getAcceptedHeader()}>
+            <CardList
+              tradies={accpetedTradies}
+              readonly={true}
+              loading={loadingAcceptedTradies}
+            />
+          </div>
+        </Tabs>
+      )}
+    </main>
   );
 };
 

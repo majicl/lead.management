@@ -8,6 +8,7 @@ const loadingInvitedTradiesSelector = (state) => state.tradies.invited.loading;
 const loadingAcceptedTradiesSelector = (state) =>
   state.tradies.accpeted.loading;
 const updateLoadingstatusLoadingSelector = (state) => state.tradies.statusLoading;
+const errorSelector = (state) => state.tradies.error;
 
 export const tradiesSelector = createSelector(
   invitedSelector,
@@ -17,6 +18,7 @@ export const tradiesSelector = createSelector(
   invitedCountSelector,
   acceptedCountSelector,
   updateLoadingstatusLoadingSelector,
+  errorSelector,
   (
     invitedTradies,
     accpetedTradies,
@@ -24,7 +26,8 @@ export const tradiesSelector = createSelector(
     loadingAcceptedTradies,
     invitedCount,
     accpetedCount,
-    updateLoadingstatus
+    updateLoadingstatus,
+    error
   ) => {
     return {
       invitedTradies,
@@ -33,7 +36,8 @@ export const tradiesSelector = createSelector(
       loadingAcceptedTradies,
       invitedCount,
       accpetedCount,
-      updateLoadingstatus
+      updateLoadingstatus,
+      error
     };
   }
 );

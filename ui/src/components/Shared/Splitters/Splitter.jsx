@@ -1,10 +1,5 @@
-import './Splitter.css';
+import "./Splitter.css";
 
-const Splitter = () => {
-    return (
-        <div className="splitter" />
-    );
-  };
-  
-  export default Splitter;
-  
+const Splitter = () => <div className="splitter" />;
+
+export default Splitter;

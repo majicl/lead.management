@@ -1,9 +1,7 @@
-const Loader = () => {
-  return (
-    <div>
-      <strong>Loading...</strong>
-    </div>
-  );
-};
+const Loader = () => (
+  <div>
+    <strong>Loading...</strong>
+  </div>
+);
 
 export default Loader;
