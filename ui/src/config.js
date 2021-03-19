@@ -2,9 +2,9 @@ const config = {};
 
 config.app = {};
 config.app.leadManagementProviderBaseUrl =
-  "https://localhost:5001/api/v1/";
+  "http://localhost:5000/api/v1/";
 config.socket = {
-  url: "https://localhost:5001/leadHub",
+  url: "http://localhost:5000/leadHub",
   notifyLeadChangesEventName: "NotifyLeadChanges",
 };
 // eslint-disable-next-line import/no-anonymous-default-export

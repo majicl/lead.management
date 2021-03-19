@@ -11,6 +11,8 @@ services:
     volumes:
       - ./ui:/opt/ui
     working_dir: /opt/ui
+    depends_on:
+      - "server"
 
   server:
     build:
@@ -21,6 +23,8 @@ services:
       - "5001:443"
     links:
       - database:database
+    depends_on:
+      - "database"
 
   database:
     image: mysql:5.6
