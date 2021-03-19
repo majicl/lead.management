@@ -1,8 +1,10 @@
-import { Fragment, Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
 import Tabs from "../Shared/Tab/Tabs.jsx";
 import CardList from "../Tradie/info.card.list.container.jsx";
+import './management.css';
 const Error = lazy(() => import("../Shared/api.error.generic.jsx"));
+
 
 const LeadManagement = ({
   invitedTradies,
@@ -33,7 +35,7 @@ const LeadManagement = ({
   };
 
   return (
-    <main style={{ width: "100%" }}>
+    <main>
       {error && (
         <Suspense fallback={<div>Loading...</div>}>
           <Error />
