@@ -1,0 +1,6 @@
+
+.action-container .price-container {
+    flex-grow: 1;
+    line-height: 50px;
+  }
+  

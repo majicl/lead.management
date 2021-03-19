@@ -31,16 +31,6 @@
   padding-right: 30px;
 }
 
-.splitter {
-  height: 1px;
-  background-color: #eee;
-}
-
 .action-container {
   display: flex;
-}
-
-.action-container .price-container {
-  flex-grow: 1;
-  line-height: 50px;
 }

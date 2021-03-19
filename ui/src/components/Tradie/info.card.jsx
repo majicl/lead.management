@@ -1,4 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
+import Splitter from "../Shared/Splitters/Splitter.jsx";
+import Price from "./Price.jsx";
+
 import "./info.card.css";
 
 const ActionBar = lazy(() => import("./action.bar.jsx"));
@@ -43,18 +46,6 @@ const InfoCard = ({
     );
   };
 
-  const splitter = () => {
-    return <div className="splitter" />;
-  };
-
-  const Price = () => {
-    return (
-      <span className="price-container">
-        <strong>{price}</strong> Lead Invitation
-      </span>
-    );
-  };
-
   return (
     <div className="card">
       {loading && (
@@ -63,7 +54,7 @@ const InfoCard = ({
         </div>
       )}
       {header()}
-      {splitter()}
+      <Splitter />
       <div className="card-item">
         <span className="label-item">
           📍
@@ -77,9 +68,13 @@ const InfoCard = ({
           🧰 Job ID:
           {id}
         </span>
-        {!action.active && <span className="label-item">{Price()}</span>}
+        {!action.active && (
+          <span className="label-item">
+            <Price price={price} label="Lead Invitation" />
+          </span>
+        )}
       </div>
-      {splitter()}
+      <Splitter />
       {contactInfo && (
         <div className="card-item">
           <span className="label-item">
@@ -94,7 +89,7 @@ const InfoCard = ({
       )}
 
       <p className="card-item">{description}</p>
-      {splitter()}
+      <Splitter />
       {action.active && (
         <div className="action-container">
           <section className="card-item">
@@ -105,7 +100,7 @@ const InfoCard = ({
               />
             </Suspense>
           </section>
-          {Price()}
+          <Price price={price} label="Lead Invitation" />
         </div>
       )}
     </div>
