@@ -17,13 +17,11 @@ const InfoCard = ({
   description,
   contactInfo,
   price,
-  action = {
-    onDecline: () => {},
-    onAccept: () => {}
-  },
+  readonly,
+  action,
   loading
 }) => {
-  const header = () => {
+  const Header = () => {
     return (
       <header className="card-item header">
         <div className="logo">
@@ -53,7 +51,7 @@ const InfoCard = ({
           <i>Loading...</i>
         </div>
       )}
-      {header()}
+      {Header()}
       <Splitter />
       <div className="card-item">
         <span className="label-item">
@@ -68,7 +66,7 @@ const InfoCard = ({
           🧰 Job ID:
           {id}
         </span>
-        {!action.active && (
+        {readonly && (
           <span className="label-item">
             <Price price={price} label="Lead Invitation" />
           </span>
@@ -90,7 +88,7 @@ const InfoCard = ({
 
       <p className="card-item">{description}</p>
       <Splitter />
-      {action.active && (
+      {!readonly && (
         <div className="action-container">
           <section className="card-item">
             <Suspense fallback={<div>Loading...</div>}>
