@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import LeadManagement from "./management.jsx";
 import { withRouter } from "react-router-dom";
+import LeadManagement from "./management.jsx";
 import { loadTradiesActionCreator } from "../../state-container/actions/tradie.actions";
 import { tradiesSelector } from "../../state-container/selectors/tradies.selector.js";
 

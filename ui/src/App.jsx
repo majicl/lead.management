@@ -1,4 +1,3 @@
-import React from "react";
 import { Provider } from "react-redux";
 import ErrorBoundary from "./error.boundary.jsx";
 import configureStore from "./state-container/store/index.js";

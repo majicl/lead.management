@@ -5,7 +5,7 @@ import Sidebar from './sidebar.jsx';
 export default ({ children }) => {
   const menuItems = [
     {
-      title: 'Laed Management',
+      title: 'Lead Management',
       uri: '/'
     }
   ];

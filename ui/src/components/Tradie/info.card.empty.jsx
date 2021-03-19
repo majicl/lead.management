@@ -1,4 +1,3 @@
-import React from 'react';
 import './info.card.empty.css';
 
 const Empty = () => {

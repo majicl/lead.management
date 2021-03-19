@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Tab = ({ label, value, activeTab, onClick }) => {
   let className = 'tab-list-item';
   if (activeTab === value) {
