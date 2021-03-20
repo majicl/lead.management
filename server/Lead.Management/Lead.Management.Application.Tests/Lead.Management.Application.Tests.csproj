@@ -17,6 +17,7 @@
     <Folder Include="Handlers\" />
     <Folder Include="Handlers\Leads\" />
     <Folder Include="Handlers\Leads\Commands\" />
+    <Folder Include="Handlers\Leads\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lead.Management.Application\Lead.Management.Application.csproj" />
