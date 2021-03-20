@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Tab from "./Tab.jsx";
-import "./Tab.css";
+import Tab from "./tab.jsx";
 
 const Tabs = ({ children, onChange = () => {}, defaultTab = "" }) => {
   const [activeTab, setActiveTab] = useState(defaultTab);
-
   useEffect(() => {
     onChange(activeTab);
   }, [activeTab]);

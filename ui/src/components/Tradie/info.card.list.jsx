@@ -1,3 +1,4 @@
+import React from "react";
 import InfoCard from "./info.card.jsx";
 import Empty from "./info.card.empty.jsx";
 
@@ -14,7 +15,6 @@ const InfoCardList = ({
         onAccept: acceptTradie,
         onDecline: declineTradie
       };
-
   return (
     <div>
       {tradies.length === 0 && !loading && <Empty />}

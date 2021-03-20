@@ -1,3 +1,4 @@
+import React from 'react';
 import "./api.error.generic.css";
 
 const Error = () => (

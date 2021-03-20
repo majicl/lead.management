@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
 import Tabs from "../Shared/Tab/Tabs.jsx";
 import CardList from "../Tradie/info.card.list.container.jsx";

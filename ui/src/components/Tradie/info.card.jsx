@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import Splitter from "../Shared/Splitters/Splitter.jsx";
 import Price from "./Price.jsx";
 
@@ -45,7 +45,7 @@ const InfoCard = ({
   };
 
   return (
-    <div className="card">
+    <div role="listitem" className="card">
       {loading && (
         <div>
           <i>Loading...</i>

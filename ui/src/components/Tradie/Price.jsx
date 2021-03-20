@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Price.css";
+import "./price.css";
 
 const Price = ({ price, label }) => (
   <span className="price-container">

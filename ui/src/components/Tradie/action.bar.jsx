@@ -1,3 +1,4 @@
+import React from 'react';
 import './action.bar.css';
 
 const ActionBar = ({ onAccept, onDecline }) => {
