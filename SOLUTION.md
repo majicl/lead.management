@@ -30,9 +30,11 @@ docker-compose up --build
 
 Open http://localhost:3000 to view it in the browser.
 
-Since in the docker-compose running the UI application depends on the API service and the API service depends on the db, it will take a while for the UI to getting up and running!
+::: warning
+*Since in the docker-compose running the UI application depends on the API service and the API service depends on the db, it takes a while for the UI to getting up and running!*
+:::
 
-!["Fully Loaded"](/images/docker-compose-log.png)
+!["Fully Loaded"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/docker-compose-log.png)
 
 ### Run Individually
 
