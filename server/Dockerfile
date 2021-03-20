@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY . .
+COPY ./src .
 WORKDIR "/src/Lead.Management.API"
 RUN dotnet build "Lead.Management.API.csproj" -c Release -o /app/build
 
