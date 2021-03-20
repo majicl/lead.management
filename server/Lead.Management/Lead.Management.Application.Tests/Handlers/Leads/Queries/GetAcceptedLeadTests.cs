@@ -9,7 +9,7 @@ using Moq;
 using Moq.AutoMock;
 using Xunit;
 
-namespace Lead.Management.Application.Tests.Handlers.Leads.Commands
+namespace Lead.Management.Application.Tests.Handlers.Leads.Queries
 {
     public class GetAcceptedLeadTests
     {
