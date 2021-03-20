@@ -28,9 +28,12 @@ namespace Lead.Management.Application.Tests.Handlers.Leads.Commands
         public async Task Handle_Calls_GetAcceptedLeadsAsync()
         {
             //Arrange 
-            var query = new GetAcceptedLead.Query();
+            _leadManagementRepository
+                .Setup(_ => _.GetAcceptedLeadsAsync(CancellationToken.None))
+                .ReturnsAsync(new List<AcceptedLead>());
 
             //Act
+            var query = new GetAcceptedLead.Query();
             await _target.Handle(query, CancellationToken.None);
 
             //Assert
@@ -41,6 +44,7 @@ namespace Lead.Management.Application.Tests.Handlers.Leads.Commands
         public async Task Handle_Maps_Data()
         {
             //Arrange
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             var lead = new AcceptedLead
             {
                 Id = 1,
@@ -49,18 +53,18 @@ namespace Lead.Management.Application.Tests.Handlers.Leads.Commands
                 ContactEmail = "test@test.com",
                 ContactName = "Alex Nouri",
                 ContactPhone = "893398498",
-                CreatedAt = new System.DateTime(2020, 03, 20, 18, 20, 22),
+                CreatedAt = new System.DateTime(2020, 03, 20, 18, 20, 22).ToUniversalTime(),
                 Description = "descp",
                 Postcode = "1234",
                 Price = 1290
 
             };
-            var query = new GetAcceptedLead.Query();
             _leadManagementRepository
                 .Setup(_ => _.GetAcceptedLeadsAsync(CancellationToken.None))
                 .ReturnsAsync(new List<AcceptedLead> { lead });
 
             //Act
+            var query = new GetAcceptedLead.Query();
             var result = await _target.Handle(query, CancellationToken.None);
 
             //Assert
@@ -73,7 +77,7 @@ namespace Lead.Management.Application.Tests.Handlers.Leads.Commands
             Assert.Equal(lead.ContactPhone, mappedLead.ContactPhone);
             Assert.Equal("Alex", mappedLead.ContactFirstName);
             Assert.Equal("Nouri", mappedLead.ContactLastName);
-            Assert.Equal("06:20PM", mappedLead.CreatedAtTime);
+            Assert.Equal("05:20 PM", mappedLead.CreatedAtTime);
             Assert.Equal("March 20", mappedLead.CreatedAtDate);
             Assert.Equal(lead.Description, mappedLead.Description);
         }
