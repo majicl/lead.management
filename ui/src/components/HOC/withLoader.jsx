@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Loader from "../Shared/Loaders/Loader.jsx";
+import Loader from "../Shared/Loaders/loader.jsx";
 
 export const withLoader = (Component) => (props) => (
   <Fragment>

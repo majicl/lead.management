@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Splitter.css";
+import "./splitter.css";
 
 const Splitter = () => <div className="splitter" />;
 

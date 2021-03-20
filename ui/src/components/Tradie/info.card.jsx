@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import Splitter from "../Shared/Splitters/Splitter.jsx";
-import Price from "./Price.jsx";
+import Splitter from "../Shared/Splitters/splitter.jsx";
+import Price from "./price.jsx";
 
 import "./info.card.css";
 

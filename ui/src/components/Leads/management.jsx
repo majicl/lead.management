@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { useHistory } from "react-router-dom";
-import Tabs from "../Shared/Tab/Tabs.jsx";
+import Tabs from "../Shared/Tab/tabs.jsx";
 import CardList from "../Tradie/info.card.list.container.jsx";
 import './management.css';
-const Error = lazy(() => import("../Shared/api.error.generic.jsx"));
 
+const Error = lazy(() => import("../Shared/api.error.generic.jsx"));
 
 const LeadManagement = ({
   invitedTradies,
