@@ -8,14 +8,5 @@ export default () => (
         <img src="assets/images/logo.png" alt="logo" />
       </span>
     </div>
-    <div className="navbar-menu-wrapper d-flex align-items-stretch">
-      <button
-        className="navbar-toggler navbar-toggler align-self-center"
-        type="button"
-        data-toggle="minimize"
-      >
-        <span className="mdi mdi-menu" />
-      </button>
-    </div>
   </nav>
 );
