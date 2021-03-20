@@ -1,8 +1,10 @@
 import React from "react";
+import "@testing-library/jest-dom";
+import { render, cleanup } from "@testing-library/react";
+
 import * as signalR from "@microsoft/signalr";
 import Socket, { eventHandler } from "../../src/Socket.jsx";
 import config from "../../src/config.js";
-import { render } from "@testing-library/react";
 
 // mock the file and its named export
 jest.mock("../../src/state-container/store", () => ({
@@ -36,6 +38,8 @@ jest.mock("@microsoft/signalr", () => {
   return socket;
 });
 
+afterAll(cleanup);
+
 describe("<Socket />", () => {
   beforeEach(() => {
     wrapper = render(<Socket key={new Date().getTime()} />);
@@ -56,5 +60,4 @@ describe("<Socket />", () => {
     const socket = new signalR.HubConnectionBuilder().withUrl().build();
     expect(socket.start).toHaveBeenCalled();
   });
-  
 });

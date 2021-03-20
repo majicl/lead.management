@@ -1,9 +1,10 @@
 import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import Price from "../../../../src/components/Tradie/Price.jsx";
+import { render, screen, cleanup } from "@testing-library/react";
+import Price from "../../../../src/components/Tradie/price.jsx";
 
-test("Price", () => {
+afterAll(cleanup);
+test("<Price />", () => {
   const price = "12.00";
   const label = "Lead";
   render(<Price price={price} label={label} />);
