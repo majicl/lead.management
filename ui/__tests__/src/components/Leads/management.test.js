@@ -36,10 +36,10 @@ describe("<Management />", () => {
   afterAll(cleanup);
 
   it("The <Error /> element is rendered", async () => {
-    //assign - act
+    //arrage - act
     render(<Management location={{ pathname: "/invited" }} error={true} />);
 
-    // assess
+    // assert
     const text =
       "The API does not respond at the moment, please contact administrator 😩";
     await waitFor(() => screen.getByText(text));
@@ -47,10 +47,10 @@ describe("<Management />", () => {
   });
 
   it("The <Tabs /> element is rendered with two tabs", () => {
-    //assign - act
+    //arrage - act
     render(<Management location={{ pathname: "/invited" }} error={false} />);
 
-    //assess
+    //assert
     const tabs = screen.getAllByRole("tab");
     expect(tabs).toHaveLength(2);
     expect(tabs[0]).toHaveTextContent("Invited");
@@ -58,7 +58,7 @@ describe("<Management />", () => {
   });
 
   it("The Invited list will be rendered as default", () => {
-    //assign
+    //arrage
     const invitedTradies = [{ id: 1, contactFirstName: "Alex" }];
     const accpetedTradies = [{ id: 2, contactFirstName: "Majid" }];
 
@@ -77,7 +77,7 @@ describe("<Management />", () => {
       />
     );
 
-    //assess
+    //assert
     expect(screen.getByText("Alex")).toBeInTheDocument();
     expect(screen.getAllByRole("listitem")).toHaveLength(1);
     expect(screen.getAllByRole("tab")[0].classList).toContain(
@@ -86,7 +86,7 @@ describe("<Management />", () => {
   });
 
   it("Click on a Tab change the list", async () => {
-    //assign
+    //arrage
     const historyMock = { push: jest.fn(), location: {}, listen: jest.fn() };
     const invitedTradies = [{ id: 1, contactFirstName: "Alex" }];
     const accpetedTradies = [{ id: 2, contactFirstName: "Majid" }];
@@ -109,7 +109,7 @@ describe("<Management />", () => {
     );
     fireEvent.click(screen.getByText("Accepted (0)"));
 
-    //assess
+    //assert
     expect(screen.getByText("Majid")).toBeInTheDocument();
     expect(screen.getAllByRole("listitem")).toHaveLength(1);
     expect(screen.getAllByRole("tab")[1].classList).toContain(
@@ -118,7 +118,7 @@ describe("<Management />", () => {
   });
 
   it("Empty invitedTradies renders <Empty />", async () => {
-    //assign
+    //arrage
     const invitedTradies = [];
     const accpetedTradies = [{ id: 2, contactFirstName: "Majid" }];
 
@@ -137,12 +137,12 @@ describe("<Management />", () => {
         />
     );
     
-    //assess
+    //assert
     expect(screen.getByText("There is no item to display... 🤷🏻")).toBeInTheDocument();
   });
 
   it("Empty accpetedTradies renders <Empty />", async () => {
-    //assign
+    //arrage
     const invitedTradies = [{ id: 2, contactFirstName: "Majid" }];
     const accpetedTradies = [];
 
@@ -161,12 +161,12 @@ describe("<Management />", () => {
         />
     );
     
-    //assess
+    //assert
     expect(screen.getByText("There is no item to display... 🤷🏻")).toBeInTheDocument();
   });
 
   it("loading invitedTradies renders <Loader />", async () => {
-    //assign
+    //arrage
     const invitedTradies = [{ id: 1, contactFirstName: "Alex" }];
     const accpetedTradies = [{ id: 2, contactFirstName: "Majid" }];
 
@@ -185,12 +185,12 @@ describe("<Management />", () => {
         />
     );
     
-    //assess
+    //assert
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 
   it("loading accpetedTradies renders <Loader />", async () => {
-    //assign
+    //arrage
     const invitedTradies = [{ id: 1, contactFirstName: "Alex" }];
     const accpetedTradies = [{ id: 2, contactFirstName: "Majid" }];
 
@@ -209,7 +209,7 @@ describe("<Management />", () => {
         />
     );
     
-    //assess
+    //assert
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 

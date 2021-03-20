@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component {
   render() {
     const { ignoreErrors, children } = this.props;
     if (this.state.hasError && !ignoreErrors) {
-      return <div>Find error(s) in your browser console</div>;
+      return <div>Something went wrong, Find more details in your browser console!</div>;
     }
     return children;
   }

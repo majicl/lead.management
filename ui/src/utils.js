@@ -28,8 +28,7 @@ export const handleActions = (initialState, reducerMap) => {
       });
     }
   };
-
-  // eslint-disable-next-line guard-for-in
+  
   for (const key in reducerMap) {
     const reducer = reducerMap[key];
 
@@ -38,7 +37,6 @@ export const handleActions = (initialState, reducerMap) => {
     }
 
     if (typeof reducer === 'object') {
-      // eslint-disable-next-line guard-for-in
       for (const subKey in reducer) {
         const subReducer = reducer[subKey];
 

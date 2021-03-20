@@ -15,7 +15,6 @@ jest.mock("../../src/state-container/store", () => ({
 
 const socketConfigs = config.get().socket;
 
-let wrapper;
 let useEffect;
 let useStateSpy;
 jest.mock("@microsoft/signalr", () => {
@@ -42,7 +41,7 @@ afterAll(cleanup);
 
 describe("<Socket />", () => {
   beforeEach(() => {
-    wrapper = render(<Socket key={new Date().getTime()} />);
+    render(<Socket key={new Date().getTime()} />);
     useEffect = jest.fn();
     useStateSpy = jest.spyOn(React, "useEffect");
     useStateSpy.mockImplementation((init) => [init, useEffect]);
