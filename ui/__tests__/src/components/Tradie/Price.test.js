@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, cleanup } from "@testing-library/react";
-import Price from "../../../../src/components/Tradie/price.jsx";
+import Price from "~/Tradie/price.jsx";
 
 afterAll(cleanup);
 test("<Price />", () => {

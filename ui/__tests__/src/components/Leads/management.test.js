@@ -10,7 +10,7 @@ import {
   cleanup,
   fireEvent
 } from "@testing-library/react";
-import Management from "../../../../src/components/Leads/management.jsx";
+import Management from "~/Leads/management.jsx";
 
 describe("<Management />", () => {
   const renderWithRedux = (
