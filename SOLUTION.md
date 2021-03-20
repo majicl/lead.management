@@ -16,7 +16,14 @@
 ```
 
 ## Solution Design
+The solution consists of two main projects. One handles the backend part based on `asp.net core` and tries to provide APIs which are needed for the client to show the leads and also push the notification with any status changes via `SignalR`. and the other one is responsible to handle the UI, show the list of invited and accepted leads and listen to the socket pushes, and act based on that.
 
+## Todo
+- More unit-tests in the front-end and backend
+- Make the components more efficient
+- Make the error handling better (.e.g if socket gets down)
+- Enhance the UI
+- Clean up packages
 ## How to run
 ### Single command
 #### Depandancies
