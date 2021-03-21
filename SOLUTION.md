@@ -16,9 +16,11 @@
 ```
 
 ## Solution Design
-The solution consists of two main projects. One handles the backend part based on `asp.net core` and tries to provide APIs which are needed for the client to show the leads and also push notifications with any status changes via `SignalR`. and the other one is responsible to handle the UI, show the list of invited and accepted leads and listen to the socket pushes, and act based on that.
+The solution consists of two main projects. One handles the backend part based on `asp.net core` and tries to provide APIs which are needed for the client to show the leads and also push notifications with any status changes via `SignalR`. and the other one is responsible to handle the UI based on `React`, show the list of invited and accepted leads and listens to the socket pushes, and act based on that.
 
 My main focus was to minimize api calls and keep everything lazy to load despite everything is getting updated!
+
+### Behavior
 
 The default tab `(Invited)` data is initiated and rendered at once. The other tab `(Accepted)` data is loaded when you click on its tab for the first time. after that, if any tabs clicked, there is not api call anymore and the only way for calling api is the push notification trigger.
 
@@ -28,33 +30,41 @@ Every signalR push notifications make all the clients aware of changes and the c
 
 !["Push Notification and Lazy Loading"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/socket.gif)
 
-I've used `Redux` to managing states in the front-end. I could NOT use any state management for this but it made my life easier and cleaner. another option was using a reactive programming library like `RxJs` or `redux-observable`.
+### Frontend
 
-there is a basic error handling in the front-end in order to show a message if any api call throws and `<ErrorBoundary />` for any runtime error.
+I've used `Redux` to managing states in the frontend. I could NOT use any state management for this but it made my life easier and cleaner. another option was using a reactive programming library like `RxJs` or `redux-observable`.
+
+there is a basic error handling in the frontend in order to show a message if any api call throws and `<ErrorBoundary />` for any runtime error.
 
 !["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/error.png)
 
-I could use css preprocessors like `sass` or `styled-components` library to having a beeter management is styles and theming but I found the `css` sufficient for it.
+I could use css preprocessors like `sass` or `styled-components` library to having a better management is styles and theming but I found the `CSS` sufficient for it.
 
-I've tried to follow `the clean architecture` in the backend and used `MediatR` to follow `mediator pattern`.
+### Backend
 
-In the MediatR handlers the desired data is fetched from Repository and mapped to the desired `DTO`. (I could use `AutoMapper`).
+I've tried to follow `the clean architecture` in the backend and used `MediatR` to follow the `mediator pattern`.
 
-I've used `Dapper` to connect to the db and execute my db queries. I don't like to write sql queries as string in the code but since the db communication wasn't so many I decided to use Dapper. I usually use an `ORM` like `entity-framework` unless I find limitation. 
+In the MediatR handlers, the desired data is fetched from `ILeadManagementRepository` and mapped to the desired `DTO`. (I could use `AutoMapper`).
 
-I'vr
+And also, broadcast any status changes via `SignalR`.
 
-You can find the back-end API documentation in its configured swagger on http://localhost:5000/swagger.
+I've used `Dapper` to connect to the db and execute the db queries. I don't like to write sql queries as a string in the code but since the db communication wasn't so many I decided to use Dapper. I usually use an `ORM` like `entity-framework` unless I find limitation. 
+
+The APIs are documented by swagger and you can find it on http://localhost:5000/swagger as soon as the backend gets up and running.
 
 !["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/swagger.png)
 
+I've implemented some basic unit-tests in the backend by `xunit` and `Moq` and some basic unit-tests in the frontend by `jest` and `testing-library`.
+
 ## Todo
-- More unit-tests in the front-end and backend
+- More unit-tests in the frontend and backend
 - Make the components more efficient
+- Avoid the first status-update call and bring it to OnConnect in the Socket hub. and remove its endpoint (/api/lead/status)
 - Make the error handling better (.e.g if socket gets down)
 - Enhance the UI
 - Clean up packages
-- Make it production ready
+- Make it production-ready
+
 ## How to run
 ### Single command
 #### Depandancies
@@ -104,18 +114,23 @@ Running the unit-tests
 ```
 yarn test
 ```
+Display the unit-tests coverage
 ```
 yarn test:coverage
 ```
+Run the frontend application
 ```
 yarn start
 ```
+Build the frontend application
 ```
 yarn build
 ```
+Display the lint error(s)/warning(s)
 ```
 yarn lint
 ```
+Fix fixable lint error(s)/warning(s)
 ```
 yarn lint:fix
 ```
