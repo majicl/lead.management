@@ -159,6 +159,12 @@ Fix fixable lint error(s)/warning(s)
 yarn lint:fix
 ```
 
+## Docker Compose
+The docker-compose consists of 3 services with 3 different approaches.
+* **database**: it uses `mysql:5.6` image and exposes port `3306`.
+* **server**: it builds a local image (if not exist) by using DockerFile in the server/src folder and exposes port `5000`.
+* **ui**: it uses `node:10.15-alpine` image and map `./ui` as the working directory exposes port `3000`.
+
 ## Frameworks and Libraries
 In the backend: asp.net core 5.0, MediatR, MySql.Data, SignalR, Dapper, Moq, xunit
 
