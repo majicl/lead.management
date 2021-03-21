@@ -34,11 +34,11 @@ Every signalR push notifications make all the clients aware of changes and the c
 
 I've used `Redux` to managing states in the frontend. I could NOT use any state management for this but it made my life easier and cleaner. another option was using a reactive programming library like `RxJs` or `redux-observable`.
 
-there is a basic error handling in the frontend in order to show a message if any api call throws and `<ErrorBoundary />` for any runtime error.
+there is a basic error handling in the frontend to show a message if any api call throws and `<ErrorBoundary />` for any runtime error.
 
 !["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/error.png)
 
-I could use css preprocessors like `sass` or `styled-components` library to having a better management is styles and theming but I found the `CSS` sufficient for it.
+I could use `CSS preprocessors` like `sass` or `styled-components` library to having a better management is styles and theming but I found the `CSS` sufficient for it.
 
 ### Backend
 
@@ -48,7 +48,7 @@ In the MediatR handlers, the desired data is fetched from `ILeadManagementReposi
 
 And also, broadcast any status changes via `SignalR`.
 
-I've used `Dapper` to connect to the db and execute the db queries. I don't like to write sql queries as a string in the code but since the db communication wasn't so many I decided to use Dapper. I usually use an `ORM` like `entity-framework` unless I find limitation. 
+I've used `Dapper` to connect to the db and execute the db queries. I don't like to write sql queries as a string in the code but since the db communication wasn't so many I decided to use Dapper. I usually use an `ORM` like `entity-framework` unless I find any limitation. 
 
 The APIs are documented by swagger and you can find it on http://localhost:5000/swagger as soon as the backend gets up and running.
 
@@ -86,7 +86,7 @@ Open http://localhost:3000 to view it in the browser.
 
 ### Run Individually
 
-#### Depandancies
+#### Dependencies
 
 - dotnet version 5.0
 - yarn version 1.22.10
