@@ -75,11 +75,23 @@ and go to the root foler by:
 ```
 cd lead.management
 ```
-### Single command
 #### Depandancies
 - docker version 20.10.5
 - docker-compose version 1.28.5
+- dotnet version 5.0
+- yarn version 1.22.10
 
+## Install frontend packages
+Run the following command in the root folder:
+```
+cd ui && yarn
+```
+## Install backened packages
+Run the following command in the root folder:
+```
+cd server/src && dotnet restore
+```
+### Single command
 Run the following command in the root folder:
 ```
 docker-compose up --build
@@ -94,11 +106,6 @@ Open http://localhost:3000 to view it in the browser.
 !["Fully Loaded"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/docker-compose-log.png)
 
 ### Run Individually
-
-#### Dependencies
-
-- dotnet version 5.0
-- yarn version 1.22.10
 
 Run the following command in the ./server/src/Lead.Management.API folder:
 ```
