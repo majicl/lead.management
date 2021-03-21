@@ -24,7 +24,7 @@ The default tab `(Invited)` data is initiated and rendered at once. The other ta
 
 if the page gets refreshed, the last opened tab will be rendered not the default tab and of course with the same lazy loading behavior. (getting help of `react router` to synchronize tab selection with route)
 
-Every signalR push notifications make all the clients aware of changes and the client will update the tabs item(s) count and just update the leads list of the opened tab (please watch 30 seconds gif).
+Every signalR push notifications make all the clients aware of changes and the client will update the tabs item(s) count and just update the leads list of the opened tab (please watch 30 seconds gif below).
 
 !["Push Notification and Lazy Loading"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/socket.gif)
 
@@ -35,6 +35,14 @@ there is a basic error handling in the front-end in order to show a message if a
 !["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/error.png)
 
 I could use css preprocessors like `sass` or `styled-components` library to having a beeter management is styles and theming but I found the `css` sufficient for it.
+
+I've tried to follow `the clean architecture` in the backend and used `MediatR` to follow `mediator pattern`.
+
+In the MediatR handlers the desired data is fetched from Repository and mapped to the desired `DTO`. (I could use `AutoMapper`).
+
+I've used `Dapper` to connect to the db and execute my db queries. I don't like to write sql queries as string in the code but since the db communication wasn't so many I decided to use Dapper. I usually use an `ORM` like `entity-framework` unless I find limitation. 
+
+I'vr
 
 You can find the back-end API documentation in its configured swagger on http://localhost:5000/swagger.
 
@@ -70,7 +78,7 @@ Open http://localhost:3000 to view it in the browser.
 
 #### Depandancies
 
-- dotnet version v5.0
+- dotnet version 5.0
 - yarn version 1.22.10
 
 Run the following command in the ./server/src/Lead.Management.API folder:
@@ -113,6 +121,6 @@ yarn lint:fix
 ```
 
 ## Frameworks and Libraries
-In the backend: asp.net core 5.0, MySql.Data, SignalR, Dapper, Moq, xunit
+In the backend: asp.net core 5.0, MediatR, MySql.Data, SignalR, Dapper, Moq, xunit
 
 In the frontend: React, Redux, microsoft/signalr, babel, webpack, jest, testing-library
