@@ -86,10 +86,18 @@ Run the following command in the root folder:
 ```
 cd ui && yarn
 ```
+come back to the root folder:
+```
+cd ..
+```
 ## Install backened packages
 Run the following command in the root folder:
 ```
 cd server/src && dotnet restore
+```
+come back to the root folder:
+```
+cd ..
 ```
 ### Single command
 Run the following command in the root folder:
