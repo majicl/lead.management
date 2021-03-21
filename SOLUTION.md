@@ -66,6 +66,15 @@ I've implemented some basic unit-tests in the backend by `xunit` and `Moq` and s
 - Make it production-ready
 
 ## How to run
+
+## Clone the repository on your machine
+```
+git clone https://github.com/majicl/lead.management.git
+```
+and go to the root foler by:
+```
+cd lead.management
+```
 ### Single command
 #### Depandancies
 - docker version 20.10.5
