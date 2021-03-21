@@ -16,7 +16,17 @@
 ```
 
 ## Solution Design
-The solution consists of two main projects. One handles the backend part based on `asp.net core` and tries to provide APIs which are needed for the client to show the leads and also push the notification with any status changes via `SignalR`. and the other one is responsible to handle the UI, show the list of invited and accepted leads and listen to the socket pushes, and act based on that.
+The solution consists of two main projects. One handles the backend part based on `asp.net core` and tries to provide APIs which are needed for the client to show the leads and also push notifications with any status changes via `SignalR`. and the other one is responsible to handle the UI, show the list of invited and accepted leads and listen to the socket pushes, and act based on that.
+
+My main focus was to minimize api calls and keep everything lazy to load despite everything is getting updated!
+
+The default tab `(Invited)` data is initiated and rendered at once. The other tab `(Accepted)` data is loaded when you click on its tab for the first time. after that, if any tabs clicked, there is not api call anymore and the only way for calling api is the push notification trigger.
+
+if the page gets refreshed, the last opened tab will be rendered not the default tab and of course with the same lazy loading behavior.
+
+Every signalR push notifications make all the clients aware of changes and the client will update the tabs item(s) count and just update the leads list of the opened tab.
+
+!["Push Notification and Lazy Loading"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/socket.gif)
 
 ## Todo
 - More unit-tests in the front-end and backend
