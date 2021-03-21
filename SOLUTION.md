@@ -78,22 +78,12 @@ cd lead.management
 #### Depandancies
 - docker version 20.10.5
 - docker-compose version 1.28.5
-- dotnet version 5.0
 - yarn version 1.22.10
 
 ## Install frontend packages
 Run the following command in the root folder:
 ```
 cd ui && yarn
-```
-come back to the root folder:
-```
-cd ..
-```
-## Install backened packages
-Run the following command in the root folder:
-```
-cd server/src && dotnet restore
 ```
 come back to the root folder:
 ```
@@ -108,7 +98,7 @@ docker-compose up --build
 Open http://localhost:3000 to view it in the browser.
 
 ::: warning
-*Since in the docker-compose running the UI application depends on the API service and the API service depends on the db, it takes a while for the UI to getting up and running!*
+*In the docker-compose running the UI application depends on the API service and the API service depends on the db. it takes a while for the UI to getting up and running!*
 :::
 
 !["Fully Loaded"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/docker-compose-log.png)
