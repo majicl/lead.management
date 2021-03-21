@@ -22,11 +22,23 @@ My main focus was to minimize api calls and keep everything lazy to load despite
 
 The default tab `(Invited)` data is initiated and rendered at once. The other tab `(Accepted)` data is loaded when you click on its tab for the first time. after that, if any tabs clicked, there is not api call anymore and the only way for calling api is the push notification trigger.
 
-if the page gets refreshed, the last opened tab will be rendered not the default tab and of course with the same lazy loading behavior.
+if the page gets refreshed, the last opened tab will be rendered not the default tab and of course with the same lazy loading behavior. (getting help of `react router` to synchronize tab selection with route)
 
-Every signalR push notifications make all the clients aware of changes and the client will update the tabs item(s) count and just update the leads list of the opened tab.
+Every signalR push notifications make all the clients aware of changes and the client will update the tabs item(s) count and just update the leads list of the opened tab (please watch 30 seconds gif).
 
 !["Push Notification and Lazy Loading"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/socket.gif)
+
+I've used `Redux` to managing states in the front-end. I could NOT use any state management for this but it made my life easier and cleaner. another option was using a reactive programming library like `RxJs` or `redux-observable`.
+
+there is a basic error handling in the front-end in order to show a message if any api call throws and `<ErrorBoundary />` for any runtime error.
+
+!["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/error.png)
+
+I could use css preprocessors like `sass` or `styled-components` library to having a beeter management is styles and theming but I found the `css` sufficient for it.
+
+You can find the back-end API documentation in its configured swagger on http://localhost:5000/swagger.
+
+!["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/swagger.png)
 
 ## Todo
 - More unit-tests in the front-end and backend
@@ -34,6 +46,7 @@ Every signalR push notifications make all the clients aware of changes and the c
 - Make the error handling better (.e.g if socket gets down)
 - Enhance the UI
 - Clean up packages
+- Make it production ready
 ## How to run
 ### Single command
 #### Depandancies
