@@ -15,6 +15,13 @@ const InfoCardList = ({
         onAccept: acceptTradie,
         onDecline: declineTradie
       };
+  const contactInfo = (tradie) =>
+    readonly
+      ? {
+          phone: tradie.contactPhone,
+          email: tradie.contactEmail
+        }
+      : null;
   return (
     <div>
       {tradies.length === 0 && !loading && <Empty />}
@@ -24,6 +31,7 @@ const InfoCardList = ({
           {...tradie}
           action={action}
           readonly={readonly}
+          contactInfo={contactInfo(tradie)}
         />
       ))}
     </div>

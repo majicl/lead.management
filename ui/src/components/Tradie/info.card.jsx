@@ -75,14 +75,14 @@ const InfoCard = ({
       <Splitter />
       {contactInfo && (
         <div className="card-item">
-          <span className="label-item">
+          <a href={`tel:${contactInfo.email}`} className="label-item">
             ☎️
             {contactInfo.phone}
-          </span>
-          <span className="label-item">
+          </a>
+          <a href={`mailto:${contactInfo.email}`} className="label-item">
             ✉️
             {contactInfo.email}
-          </span>
+          </a>
         </div>
       )}
 
