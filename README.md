@@ -1,56 +1,161 @@
-hipages Full Stack Engineer Tech Challenge
-==========================================
-Welcome to the hipages Full Stack Engineer Tech Challenge!  The purpose of this challenge is to help us assess your technical skills.  We know that you have limited time to devote to this task and may not be able to provide the complete solution as you would given more time, so we suggest you focus on the core requirements first, then any additional features if you have time left over.
+# Lead Management
 
-## The Task
-Your task is to create a lead management UI for a tradie.  This should be presented as a single page application (SPA) using a modern JS framework.
+## A lead management UI for a tradie.
 
-### Invited Tab
-The first view you need to create is the **Invited** tab, which contains all leads in the **new** status.
-![Invited Tab](/invited_tab.png?raw=true "Invited Tab")
+## Folder Structure Overview
+```
+.
++-- server (backend)
+|   +-- Dockerfile
+|   +-- ...config
+|   +-- src
++-- ui (frontend)
+|   +-- ...config
+|   +-- src
++-- docker-compose.yml
+```
 
-As you can see in the screenshot, each lead is a card in a list which contains the following pieces of information:
-* Contact first name
-* Date created
-* Suburb
-* Category
-* ID
-* Description
-* Price
+## Solution Design
+The solution consists of two main projects. One handles the backend part based on `asp.net core` and tries to provide APIs which are needed for the client to show the leads and also push notifications with any status changes via `SignalR`. and the other one is responsible to handle the UI based on `React`, show the list of invited and accepted leads and listens to the socket pushes, and act based on that.
 
-Along with that information you can see two buttons: **Accept** and **Decline**
-* Upon clicking on **Accept**, the lead must be updated to the **accepted** status in the database
-* Upon clicking on **Decline**, the lead must be updated to the **declined** status in the database
+My main focus was to minimize api calls and keep everything lazy to load despite everything is getting updated!
 
-### Accepted Tab
-The second view you need to create is the **Accepted** tab, which contains all leads in the **accepted** status.
-![Accepted Tab](/accepted_tab.png?raw=true "Accepted Tab")
+### Behavior
 
-As you can see in the screenshot, the lead cards follow a similar format and contain some additional data:
-* Contact full name
-* Contact phone number
-* Contact email
+The default tab `(Invited)` data is initiated and rendered at once. The other tab `(Accepted)` data is loaded when you click on its tab for the first time. after that, if any tabs clicked, there is not api call anymore and the only way for calling api is the push notification trigger.
 
-### Notes
-* For the icons in the UI, you can use something like font-awesome or SVG icons, whatever you choose.
-* There are jobs already loaded into the database
+if the page gets refreshed, the last opened tab will be rendered not the default tab and of course with the same lazy loading behavior. (getting help of `react router` to synchronize tab selection with route)
 
-## Getting Started
-We have provided a bit of boilerplate code that you can use to get started.  You are **not** required to use this boilerplate, so feel free to throw it all away and start fresh if you prefer.
+Every signalR push notifications make all the clients aware of changes and the client will update the tabs item(s) count and just update the leads list of the opened tab (please watch 30 seconds gif below).
 
-The boilerplate code assumes you have Docker running on your machine.  If you do not, they offer easy to install binaries ([Mac](https://docs.docker.com/docker-for-mac/install/)) ([Windows](https://docs.docker.com/docker-for-windows/install/)).
+!["Push Notification and Lazy Loading"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/socket.gif)
 
-From the root of the project, run `docker-compose up -d`
-* You should now have the UI running at http://localhost:3000 and the server running at http://localhost:8080
-* You should now have a MySQL database running at localhost:3306
-    * The username is `root`
-    * The password is `hipages`
+### Frontend
 
-If at any point you want to refresh the database, you can stop the Docker containers (`docker-compose down`) and start them again
-    
-## Submission
-Please document your solution in the SOLUTION.md file.  This should explain why you've made the design choices that you have and clarify anything you feel isn't obvious.  Feel free to also include what else you would have done given more time.
+I've used `Redux` to managing states in the frontend. I could NOT use any state management for this but it made my life easier and cleaner. another option was using a reactive programming library like `RxJs` or `redux-observable`.
 
-**Please include instructions on how to run your app if it is not using the boilerplate provided.**
+there is a basic error handling in the frontend to show a message if any api call throws and `<ErrorBoundary />` for any runtime error.
 
-Once completed, please upload your solution to a public Github repo and share the link with **recruitment@hipages.com.au**
+!["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/error.png)
+
+I could use `CSS preprocessors` like `sass` or `styled-components` library to having a better management is styles and theming but I found the `CSS` sufficient for it.
+
+### Backend
+
+I've tried to follow `the clean architecture` in the backend and used `MediatR` to follow the `mediator pattern`.
+
+In the MediatR handlers, the desired data is fetched from `ILeadManagementRepository` and mapped to the desired `DTO`. (I could use `AutoMapper`).
+
+And also, broadcast any status changes via `SignalR`.
+
+I've used `Dapper` to connect to the db and execute the db queries. I don't like to write sql queries as a string in the code but since the db communication wasn't so many I decided to use Dapper. I usually use an `ORM` like `entity-framework` unless I find any limitation. 
+
+The APIs are documented by swagger and you can find it on http://localhost:5000/swagger as soon as the backend gets up and running.
+
+!["Error"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/swagger.png)
+
+I've implemented some basic unit-tests in the backend by `xunit` and `Moq` and some basic unit-tests in the frontend by `jest` and `testing-library`.
+
+## Todo
+- More unit-tests in the frontend and backend
+- Make the components more efficient
+- Avoid the first status-update call and bring it to OnConnect in the Socket hub. and remove its endpoint (/api/lead/status)
+- Make the error handling better (.e.g if socket gets down)
+- Enhance the UI
+- Clean up packages
+- Make it production-ready
+
+## How to run
+
+## Clone the repository on your machine
+```
+git clone https://github.com/majicl/lead.management.git
+```
+and go to the root foler by:
+```
+cd lead.management
+```
+#### Depandancies
+- docker version 20.10.5
+- docker-compose version 1.28.5
+- yarn version 1.22.10
+
+## Install frontend packages
+Run the following command in the root folder:
+```
+cd ui && yarn
+```
+come back to the root folder:
+```
+cd ..
+```
+### Single command
+Run the following command in the root folder:
+```
+docker-compose up --build
+```
+
+Open http://localhost:3000 to view it in the browser.
+
+::: warning
+*In the docker-compose running the UI application depends on the API service and the API service depends on the db. it takes a while for the UI to getting up and running!*
+:::
+
+!["Fully Loaded"](https://raw.githubusercontent.com/majicl/lead.management/master/docs/docker-compose-log.png)
+
+### Run Individually
+
+Run the following command in the ./server/src/Lead.Management.API folder:
+```
+dotnet restore && dotnet run
+```
+The API service will be available on http://localhost:5000
+
+::: warning
+*Make sure you have the database connection-string configured in the appsettings.Development.json*
+:::
+
+And run the following command in the ./ui folder:
+```
+yarn && yarn start
+```
+The UI will be available on http://localhost:3000
+
+## Available scripts in the client project
+Run the following command in the ./ui folder:
+Running the unit-tests
+
+```
+yarn test
+```
+Display the unit-tests coverage
+```
+yarn test:coverage
+```
+Run the frontend application
+```
+yarn start
+```
+Build the frontend application
+```
+yarn build
+```
+Display the lint error(s)/warning(s)
+```
+yarn lint
+```
+Fix fixable lint error(s)/warning(s)
+```
+yarn lint:fix
+```
+
+## Docker Compose
+The docker-compose consists of 3 services with 3 different approaches.
+* **database**: it uses `mysql:5.6` image and exposes port `3306`.
+* **server**: it builds a local image (if not exist) by using DockerFile in the server/src folder and exposes port `5000`.
+* **ui**: it uses `node:10.15-alpine` image and map `./ui` as the working directory exposes port `3000`.
+
+## Frameworks and Libraries
+In the backend: asp.net core 5.0, MediatR, MySql.Data, SignalR, Dapper, Moq, xunit
+
+In the frontend: React, Redux, microsoft/signalr, babel, webpack, jest, testing-library
