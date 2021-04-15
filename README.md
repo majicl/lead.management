@@ -42,8 +42,6 @@ I could use `CSS preprocessors` like `sass` or `styled-components` library to ha
 
 ### Backend
 
-I've tried to follow `the clean architecture` in the backend and used `MediatR` to follow the `mediator pattern`.
-
 In the MediatR handlers, the desired data is fetched from `ILeadManagementRepository` and mapped to the desired `DTO`. (I could use `AutoMapper`).
 
 And also, broadcast any status changes via `SignalR`.
